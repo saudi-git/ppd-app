@@ -17,9 +17,12 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: portfolio_db
+      MYSQL_DATABASE: db_sfms
     ports:
       - "3306:3306"
+    # DITO ANG DAGDAG:
+    volumes:
+      - db_data:/var/lib/mysql
 
   phpmyadmin:
     image: phpmyadmin
@@ -32,3 +35,7 @@ services:
       UPLOAD_LIMIT: 256M
     depends_on:
       - db
+
+# KAILANGAN DIN ITO SA PINAKABABA:
+volumes:
+  db_data:

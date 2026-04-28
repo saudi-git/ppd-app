@@ -10,7 +10,7 @@ session_start();
     <title>PPD-PIMS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/admin/images/mpw-icon.png">
+    <link rel="icon" href="images/mpw-icon.png">
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -911,7 +911,7 @@ session_start();
                 }
             }
 
-            
+
 
             // Break subject into lines every 120 words
             let words = subjectText.split(" ");
@@ -947,7 +947,7 @@ session_start();
                 width: 100%;
                 min-height: 99vh;
                 padding: 1px;
-                background-image: url('/admin/print/bg-image.jpg');
+                background-image: url('print/bg-image.jpg');
                 background-size: cover;
                 background-repeat: no-repeat;
                 background-position: center;
@@ -1112,15 +1112,22 @@ session_start();
                     {
                         title: 'DOCUMENT DATE',
                         data: 'dat',
-                        render: function(data, type, row) {
+                        render: function(data, type) {
                             if (!data) return '';
-                            const date = new Date(data);
-                            const options = {
-                                year: 'numeric',
+
+                            let d = new Date(data);
+
+                            // SORTING & TYPE
+                            if (type === 'sort' || type === 'type') {
+                                return d.getTime();
+                            }
+
+                            // DISPLAY: Month DD, YYYY
+                            return d.toLocaleDateString('en-US', {
                                 month: 'long',
-                                day: 'numeric'
-                            };
-                            return date.toLocaleDateString('en-US', options); // e.g., November 8, 2025
+                                day: '2-digit',
+                                year: 'numeric'
+                            });
                         }
                     },
                     {
@@ -1154,6 +1161,18 @@ session_start();
                             return `<button class="btn btn-sm btn-info view-btn" data-file="${data}">
                                         <i class="fas fa-eye"></i> View
                                     </button> <br>
+                    
+                            ${row.file2 && row.file2.startsWith("https://drive.google.com/")
+                            ? `<a href="${row.file2}" target="_blank">
+                            <button class="btn btn-success btn-sm" style="margin-top:1px;">
+                            <i class="fas fa-link"></i> Link
+                            </button>
+                            </a>`
+                            : `<button class="btn btn-secondary btn-sm" style="margin-top:1px;" disabled>
+                            <i class="fas fa-link"></i> Link
+                            </button>`
+                            }
+                                <br>
                                     <button style="margin-top: 1px;" class="btn btn-warning btn-sm edit-btn" data-row="${meta.row}">
                                     <i class="fas fa-edit"></i> Edit
                                     </button> <br>
@@ -1206,7 +1225,7 @@ session_start();
                 const file = $(this).data('file');
 
                 if (file && file.trim() !== '') {
-                    $('#docFrame').attr('src', '/admin/uploads/' + encodeURIComponent(file)).show();
+                    $('#docFrame').attr('src', 'uploads/' + encodeURIComponent(file)).show();
                     $('#docMessage').hide();
                 } else {
                     $('#docFrame').hide().attr('src', ''); // clear iframe

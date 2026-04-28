@@ -5,7 +5,7 @@
     <title>PPD-PIMS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/admin/images/mpw-icon.png">
+    <link rel="icon" href="images/mpw-icon.png">
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -768,7 +768,7 @@
                 const file = $(this).data('file');
 
                 if (file && file.trim() !== '') {
-                    $('#docFrame').attr('src', '/admin/uploads/' + encodeURIComponent(file)).show();
+                    $('#docFrame').attr('src', 'uploads/' + encodeURIComponent(file)).show();
                     $('#docMessage').hide();
                 } else {
                     $('#docFrame').hide().attr('src', ''); // clear iframe
@@ -788,7 +788,7 @@
 
                 if (file2 && file2.trim() !== '') {
                     // If file exists, show it in iframe
-                    $('#docFrame2').attr('src', '/admin/uploads/' + encodeURIComponent(file2)).show();
+                    $('#docFrame2').attr('src', 'uploads/' + encodeURIComponent(file2)).show();
                     $('#docMessage2').hide();
                 } else {
                     // If no file, hide iframe and show message
@@ -814,7 +814,7 @@
 
                 if (file3 && file3.trim() !== '') {
                     // If file exists, show it in iframe
-                    $('#docFrame3').attr('src', '/admin/uploads/' + encodeURIComponent(file3)).show();
+                    $('#docFrame3').attr('src', 'uploads/' + encodeURIComponent(file3)).show();
                     $('#docMessage3').hide();
                 } else {
                     // If no file, hide iframe and show message

@@ -15,52 +15,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rel = mysqli_real_escape_string($conn, $_POST['rel'] ?? '');
     $inputBy = mysqli_real_escape_string($conn, $_POST['inputBy'] ?? '');
 
-    /* ===============================
-       REQUIRED FIELD VALIDATION
-    =============================== */
-    if (
-        empty($stud_no) ||
-        empty($req) ||
-        empty($dat) ||
-        empty($subject) ||
-        empty($con) ||
-        empty($type)
-    ) {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Please fill in all required fields.'
-        ]);
-        exit;
+    // Format date
+    if (!empty($dat)) {
+        $dat = date('Y-m-d', strtotime($dat));
     }
-
-    // Format & validate date
-    if (!strtotime($dat)) {
-        echo json_encode([
-            'status' => 'error',
-            'message' => 'Invalid document date.'
-        ]);
-        exit;
-    }
-    $dat = date('Y-m-d', strtotime($dat));
 
     // Default empty file name
     $fileNameToSave = "";
 
-    /* ===============================
-       FILE UPLOAD VALIDATION
-    =============================== */
+    // If file is uploaded
     if (!empty($_FILES['file']['name'])) {
 
-        // 🔴 THIS IS THE IMPORTANT PART YOU ASKED ABOUT
-        if (!isset($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Upload cancelled or failed.'
-            ]);
-            exit;
-        }
-
-        include "common_directory.php"; // must contain: $uploadFileDir
+        include "common_directory.php"; // must contain: $uploadFileDir = "/path/";
 
         if (!is_dir($uploadFileDir)) {
             mkdir($uploadFileDir, 0755, true);
@@ -70,10 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $allowed = ['pdf', 'jpg', 'jpeg', 'png', 'docx', 'xlsx', 'txt', 'mp4'];
 
         if (!in_array($ext, $allowed)) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Invalid file type.'
-            ]);
+            echo json_encode(["status" => "error", "message" => "Invalid file type"]);
             exit;
         }
 
@@ -81,32 +44,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $target = $uploadFileDir . $fileNameToSave;
 
         if (!move_uploaded_file($_FILES['file']['tmp_name'], $target)) {
-            echo json_encode([
-                'status' => 'error',
-                'message' => 'Failed to upload file.'
-            ]);
+            echo json_encode(["status" => "error", "message" => "Failed to upload file"]);
             exit;
         }
     }
 
-    /* ===============================
-       DATABASE INSERT
-    =============================== */
+    // INSERT
     $sql = "INSERT INTO documents 
             (stud_no, req, dat, subject, con, type, remarks, rel, inputBy, file, file2, file3, rem2, rem3)
-            VALUES 
+                VALUES 
             ('$stud_no', '$req', '$dat', '$subject', '$con', '$type', '$remarks', '$rel', '$inputBy', '$fileNameToSave', '', '', '', '')";
 
+
     if (mysqli_query($conn, $sql)) {
-        echo json_encode([
-            'status' => 'success',
-            'message' => 'Docs added successfully!'
-        ]);
+        echo json_encode(['status' => 'success', 'message' => 'Docs added successfully!']);
     } else {
-        echo json_encode([
-            'status' => 'error',
-            'message' => mysqli_error($conn)
-        ]);
+        echo json_encode(['status' => 'error', 'message' => mysqli_error($conn)]);
     }
 
     exit();

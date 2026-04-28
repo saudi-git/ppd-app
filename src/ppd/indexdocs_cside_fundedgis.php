@@ -10,7 +10,7 @@ session_start();
     <title>PPD-PIMS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/admin/images/mpw-icon.png">
+    <link rel="icon" href="images/mpw-icon.png">
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -947,8 +947,8 @@ session_start();
                             },
                             dataType: 'json',
                             success: function(newData) {
-                                if (newData && newData.stud_id8) {
-                                    const row = table.row('#' + newData.stud_id8);
+                                if (newData && newData.stud_id2) {
+                                    const row = table.row('#' + newData.stud_id2);
                                     row.node() ? row.data(newData).draw(false) :
                                         table.ajax.reload(null, false);
                                 } else {
@@ -1403,7 +1403,7 @@ session_start();
                 }
 
                 const ext = file.split('.').pop().toLowerCase();
-                const filePath = '/admin/funded_uploads/' + encodeURIComponent(file);
+                const filePath = 'funded_uploads/' + encodeURIComponent(file);
 
                 // PDF → normal iframe
                 if (ext === 'pdf') {

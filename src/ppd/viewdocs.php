@@ -5,7 +5,7 @@
     <title>PPD-PIMS</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="/admin/images/mpw-icon.png">
+    <link rel="icon" href="images/mpw-icon.png">
 
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
@@ -202,7 +202,7 @@
 
                     <!-- Message when no file -->
                     <div id="docMessage" class="text-center p-3" style="display:none; font-style:italic; color:gray;">
-                        📂 No file uploaded yet.
+                        ? No file uploaded yet.
                     </div>
                 </div>
 
@@ -329,7 +329,7 @@
             document.getElementById('stud_no').value = rowData.stud_no;
             document.getElementById('req').value = rowData.req;
 
-            // ✅ Handle date
+            // ? Handle date
             if (rowData.dat) {
                 const dateObj = new Date(rowData.dat);
 
@@ -581,7 +581,7 @@
 
                     <!-- Message when no file -->
                     <div id="docMessage3" class="text-center p-3" style="display:none; font-style:italic; color:gray;">
-                        📂 No file uploaded yet.
+                        ? No file uploaded yet.
                     </div>
                 </div>
 
@@ -610,7 +610,7 @@
 
                     <!-- Message when no file -->
                     <div id="docMessage2" class="text-center p-3" style="display:none; font-style:italic; color:gray;">
-                        📂 No file uploaded yet.
+                        ? No file uploaded yet.
                     </div>
                 </div>
 
@@ -670,18 +670,19 @@
                         render: function(data, type) {
                             if (!data) return '';
 
-                            // SORTING: gawing timestamp
+                            let d = new Date(data);
+
+                            // SORTING & TYPE
                             if (type === 'sort' || type === 'type') {
-                                return new Date(data).getTime();
+                                return d.getTime();
                             }
 
-                            // DISPLAY: MM-DD-YYYY
-                            let d = new Date(data);
-                            let mm = String(d.getMonth() + 1).padStart(2, '0');
-                            let dd = String(d.getDate()).padStart(2, '0');
-                            let yyyy = d.getFullYear();
-
-                            return `${mm}-${dd}-${yyyy}`;
+                            // DISPLAY: Month DD, YYYY
+                            return d.toLocaleDateString('en-US', {
+                                month: 'long',
+                                day: '2-digit',
+                                year: 'numeric'
+                            });
                         }
                     },
                     {
@@ -712,7 +713,7 @@
                     {
                         title: 'REMARKS',
                         data: 'file',
-                        className: 'text-center align-middle', // ✅ centers both horizontally & vertically
+                        className: 'text-center align-middle', // ? centers both horizontally & vertically
                         render: function(data, type, row, meta) {
                             return `
                                 <button style="margin-top: 1px;" class="btn btn-primary btn-sm edit-btn" data-row="${meta.row}">
@@ -730,7 +731,7 @@
                     {
                         title: 'ACTION',
                         data: 'file',
-                        className: 'text-center align-middle', // ✅ centers both horizontally & vertically
+                        className: 'text-center align-middle', // ? centers both horizontally & vertically
                         render: function(data, type, row, meta) {
                             return `
                         <button style="margin-top: 1px;" class="btn btn-sm btn-info view-btn" data-file="${data}">
@@ -739,16 +740,16 @@
                         <button style="margin-top: 1px;" class="btn btn-sm btn-warning view2-btn" data-file2="${row.file2}">
                         <i class="fas fa-eye"></i> Actn
                         </button>  <br>
-                 ${row.file2 && row.file2.startsWith("https://drive.google.com/")
-  ? `<a href="${row.file2}" target="_blank">
-        <button class="btn btn-success btn-sm" style="margin-top:1px;">
-            <i class="fas fa-link"></i> Link
-        </button>
-     </a>`
-  : `<button class="btn btn-secondary btn-sm" style="margin-top:1px;" disabled>
-        <i class="fas fa-link"></i> Link
-     </button>`
-}
+                        ${row.file2 && row.file2.startsWith("https://drive.google.com/")
+                            ? `<a href="${row.file2}" target="_blank">
+                            <button class="btn btn-success btn-sm" style="margin-top:1px;">
+                            <i class="fas fa-link"></i> Link
+                            </button>
+                        </a>`
+                            : `<button class="btn btn-secondary btn-sm" style="margin-top:1px;" disabled>
+                        <i class="fas fa-link"></i> Link
+                        </button>`
+                        }
 
 
                         <br>
@@ -771,7 +772,7 @@
             });
 
 
-            // ✅ REL dropdown filter
+            // ? REL dropdown filter
             $('#rel-filter').on('change', function() {
                 table.column(7).search(this.value).draw(); // column 7 = REL
             });
@@ -782,7 +783,7 @@
                 const file = $(this).data('file');
 
                 if (file && file.trim() !== '') {
-                    $('#docFrame').attr('src', '/admin/uploads/' + encodeURIComponent(file)).show();
+                    $('#docFrame').attr('src', 'uploads/' + encodeURIComponent(file)).show();
                     $('#docMessage').hide();
                 } else {
                     $('#docFrame').hide().attr('src', ''); // clear iframe
@@ -802,7 +803,7 @@
 
                 if (file2 && file2.trim() !== '') {
                     // If file exists, show it in iframe
-                    $('#docFrame2').attr('src', '/admin/uploads/' + encodeURIComponent(file2)).show();
+                    $('#docFrame2').attr('src', 'uploads/' + encodeURIComponent(file2)).show();
                     $('#docMessage2').hide();
                 } else {
 
@@ -829,7 +830,7 @@
 
                 if (file3 && file3.trim() !== '') {
                     // If file exists, show it in iframe
-                    $('#docFrame3').attr('src', '/admin/uploads/' + encodeURIComponent(file3)).show();
+                    $('#docFrame3').attr('src', 'uploads/' + encodeURIComponent(file3)).show();
                     $('#docMessage3').hide();
                 } else {
                     // If no file, hide iframe and show message
@@ -872,7 +873,7 @@
 
 
             $(document).on('click', '.btn-delete', function() {
-                var stud_id8 = $(this).data('id'); // ✅ use data-id instead of id
+                var stud_id8 = $(this).data('id'); // ? use data-id instead of id
                 console.log("Deleting ID:", stud_id8);
                 $("#modal_confirm").modal('show');
                 $('#btn_yes').attr('name', stud_id8);

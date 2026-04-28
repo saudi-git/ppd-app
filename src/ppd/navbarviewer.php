@@ -136,7 +136,7 @@
          <!-- Left Section -->
          <div class="left-section">
              <a href="#" class="navbar-brand">
-                 <img src="/admin/images/mpw-icon.png" alt="MPW Logo" class="navbar-logo">
+                 <img src="images/mpw-icon.png" alt="MPW Logo" class="navbar-logo">
                  PLANNING AND PROGRAMMING DIVISION PIMS | MPW-BARMM
              </a>
          </div>
@@ -159,8 +159,8 @@
                  <div class="dropdown-content">
                      <!-- <a href="#">User</a> -->
                      <a href="indexdocs_cside_funded1.php">Funded</a>
-                     <a href="unfunded_cside1.php">Unfunded</a>
-                     <a href="indexdocs_cside_planning1.php">Planning</a>
+                     <!-- <a href="unfunded_cside1.php">Unfunded</a> -->
+                     <!-- <a href="indexdocs_cside_planning1.php">Planning</a> -->
                      <a href="viewdocs.php">Documents</a>
                      <!-- <a href="">Register</a> -->
                      <!-- <a href="adminviewdocs2.php">Viewer2</a> -->

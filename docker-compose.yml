@@ -1,11 +1,8 @@
 
-version: '3.9'
-
-
 services:
   app:
     build: .
-    container_name: php-app
+    container_name: ppd-php-app
     ports:
       - "8000:80"
     volumes:
@@ -15,23 +12,24 @@ services:
 
   db:
     image: mysql:8
-    container_name: mysql-db
+    container_name: ppd-mysql-db
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: db_sfms
     ports:
-      - "3306:3306"
+      - "3307:3306"
     # DITO ANG DAGDAG:
     volumes:
       - db_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
 
   phpmyadmin:
     image: phpmyadmin
-    container_name: phpmyadmin
+    container_name: ppd-phpmyadmin
     restart: always
     ports:
-      - "8081:80"
+      - "8082:80"
     environment:
       PMA_HOST: db
       UPLOAD_LIMIT: 256M

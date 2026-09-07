@@ -3,3 +3,4 @@ Dockerfile
 docker-compose.override.yml
 service_account*.json
 *credentials*.json
+*.zip

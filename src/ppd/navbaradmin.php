@@ -20,9 +20,13 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                background-color: #f1f1f1;
-                padding: 0 10px;
-                flex-wrap: wrap;
+                background-color: #12446e;
+                border-top: 4px solid #12446e;
+                border-bottom: 2px solid #12446e;
+                min-height: 88px;
+                padding: 0 22px;
+                flex-wrap: nowrap;
+                box-sizing: border-box;
             }
 
             /* Left and right sections */
@@ -32,24 +36,58 @@
                 align-items: center;
             }
 
+            .topnav .right-section {
+                gap: 12px;
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+
+            .topnav .left-section {
+                min-width: 0;
+                flex: 1 1 auto;
+            }
+
             /* Navbar brand/logo */
             .navbar-logo {
-                width: 45px;
-                height: 45px;
-                margin-right: 10px;
+                width: 40px;
+                height: 40px;
+                margin-right: 14px;
+                object-fit: contain;
             }
 
             .navbar-brand {
-                font-size: 18px;
-                font-weight: 500;
-                color: #9d9d9d;
+                display: flex;
+                align-items: center;
+                color: #ffffff;
                 text-decoration: none;
+                min-width: 0;
+            }
+
+            .brand-text {
+                display: flex;
+                flex-direction: column;
+                line-height: 1.2;
+                min-width: 0;
+            }
+
+            .brand-title {
+                font-size: 21px;
+                font-weight: 700;
+                color: #ffffff;
+                overflow-wrap: anywhere;
+            }
+
+            .brand-subtitle {
+                margin-top: 4px;
+                font-size: 12px;
+                font-weight: 400;
+                color: #d8e4ee;
+                overflow-wrap: anywhere;
             }
 
             /* Dropdown */
             .dropdown {
                 position: relative;
-                margin-left: 10px;
             }
 
             .dropbtn {
@@ -57,39 +95,58 @@
                 border: none;
                 font-size: 16px;
                 cursor: pointer;
-                color: #9d9d9d;
-                padding: 14px 10px;
+                color: #ffffff;
+                padding: 15px 10px;
                 display: flex;
                 align-items: center;
                 gap: 5px;
+                border-radius: 4px;
+                line-height: 1;
             }
 
             .dropbtn i {
                 margin-right: 5px;
             }
 
+            .dropbtn a {
+                color: inherit;
+                text-decoration: none;
+            }
+
             .dropdown-content {
                 display: none;
                 position: absolute;
-                background-color: #f9f9f9;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #ffffff;
                 min-width: 160px;
-                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+                padding: 0;
+                box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
                 z-index: 1000;
             }
 
             .dropdown-content a {
-                color: black;
-                padding: 10px 16px;
+                color: #000000;
+                padding: 13px 16px;
                 text-decoration: none;
                 display: block;
+                font-size: 16px;
+                line-height: 1.15;
+                white-space: nowrap;
             }
 
             .dropdown-content a:hover {
-                background-color: #ddd;
+                background-color: #f1f5f9;
+                color: #12446e;
             }
 
             .dropdown:hover .dropdown-content {
                 display: block;
+            }
+
+            .dropdown:hover .dropbtn {
+                background-color: rgba(255, 255, 255, 0.1);
             }
 
             /* Hamburger menu */
@@ -97,34 +154,129 @@
                 display: none;
                 font-size: 24px;
                 cursor: pointer;
-                color: #9d9d9d;
+                color: #ffffff;
+                flex: 0 0 auto;
+            }
+
+            @media screen and (max-width: 1100px) {
+                .topnav {
+                    padding: 0 16px;
+                }
+
+                .topnav .right-section {
+                    gap: 4px;
+                }
+
+                .brand-title {
+                    font-size: 18px;
+                }
+
+                .dropbtn {
+                    font-size: 15px;
+                    padding: 14px 8px;
+                }
             }
 
             @media screen and (max-width: 768px) {
 
-                .topnav .left-section,
+                .topnav {
+                    align-items: flex-start;
+                    padding: 12px 18px;
+                    flex-wrap: wrap;
+                    min-height: 76px;
+                }
+
+                .topnav .left-section {
+                    width: calc(100% - 42px);
+                    flex: 1 1 calc(100% - 42px);
+                }
+
+                .navbar-logo {
+                    width: 36px;
+                    height: 36px;
+                    margin-right: 10px;
+                }
+
                 .topnav .right-section {
                     display: none;
                     flex-direction: column;
                     width: 100%;
+                    align-items: flex-start;
+                    gap: 0;
+                    margin-top: 12px;
+                    order: 3;
                 }
 
-                .topnav.responsive .left-section,
                 .topnav.responsive .right-section {
                     display: flex;
                 }
 
+                .brand-title {
+                    font-size: 16px;
+                }
+
+                .brand-subtitle {
+                    font-size: 10px;
+                }
+
+                .dropdown {
+                    width: 100%;
+                }
+
                 .dropdown-content {
                     position: relative;
+                    top: auto;
+                    left: auto;
+                    transform: none;
+                    display: block;
+                    width: calc(100% - 24px);
+                    margin-left: 24px;
+                    box-shadow: none;
+                    background-color: rgba(255, 255, 255, 0.08);
+                }
+
+                .dropdown-content a {
+                    color: #ffffff;
+                    padding: 12px 14px;
+                }
+
+                .dropdown-content a:hover {
+                    background-color: rgba(255, 255, 255, 0.12);
+                    color: #ffffff;
                 }
 
                 .topnav.responsive .dropbtn {
                     width: 100%;
                     text-align: left;
+                    justify-content: flex-start;
                 }
 
                 .icon {
                     display: block;
+                }
+            }
+
+            @media screen and (max-width: 480px) {
+                .topnav {
+                    padding: 10px 12px;
+                }
+
+                .navbar-logo {
+                    width: 32px;
+                    height: 32px;
+                    margin-right: 8px;
+                }
+
+                .brand-title {
+                    font-size: 14px;
+                }
+
+                .brand-subtitle {
+                    font-size: 9px;
+                }
+
+                .icon {
+                    font-size: 22px;
                 }
             }
         </style>
@@ -137,7 +289,10 @@
             <div class="left-section">
                 <a href="#" class="navbar-brand">
                     <img src="images/mpw-icon.png" alt="MPW Logo" class="navbar-logo">
-                    PLANNING AND PROGRAMMING DIVISION PIMS | MPW-BARMM
+                    <span class="brand-text">
+                        <span class="brand-title">Ministry of Public Works</span>
+                        <span class="brand-subtitle">Bangsamoro Autonomous Region in Muslim Mindanao</span>
+                    </span>
                 </a>
             </div>
 
@@ -146,7 +301,7 @@
                 <!-- Home -->
                 <div class="dropdown">
                     <!-- <button class="dropbtn"><i class="fas fa-home"></i> Home</button> -->
-                    <button class="dropbtn" style="margin-top: 1px;"><a href="admin.php" style="color: #9d9d9d;"><i class='fas fa-home'></i> Home</a>
+                    <button class="dropbtn" style="margin-top: 1px;"><a href="admin.php"><i class='fas fa-home'></i> Home</a></button>
                     <div class="dropdown-content">
                         <!-- <a href="home.php">Main Home</a> -->
                     </div>

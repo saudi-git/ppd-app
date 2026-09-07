@@ -1,0 +1,225 @@
+#footer{
+	height:22px;
+	width:100%;
+	background-image: linear-gradient(#f1f1f1, #f1f1f1 50%, #f1f1f1);
+	background-repeat: no-repeat;
+	filter: none;
+	border: 1px solid #f1f1f1;
+	position: fixed;
+	right: 0;
+	left: 0;
+	z-index: 1030;
+	bottom: 0;
+	border-width: 1px 0 0;
+}
+
+#panel-margin{
+	margin-top:40%;
+}
+
+#title{
+	color:#fff;
+}
+
+#sidebar{
+	top:55px;
+	width:0.5%;
+	position:fixed;
+	height:100%;
+	/* border:1px solid rgba(10,55,110,255); */
+	background-color: rgba(255,255,255,255);
+	/* background-color: #fa4100; */
+}
+
+#menu ul li{
+	list-style-type:none;
+	padding:5px;
+	border-bottom:0;
+}
+
+#menu ul li a:hover{
+	text-decoration:none;
+}
+
+.user{
+	color:#fff;
+	margin-top:10px;
+	margin-right:20px;
+}
+
+#content{
+	float:right;
+	width:98.9%;
+	margin-right:10px;
+	height:1000px;
+}
+
+
+.links5 {
+	display: flex;
+	justify-content: space-between;
+}
+.links5 a {
+	margin: 10px 0;
+	font-size: 0.80em;
+	color: #8f8f8f;
+	text-decoration: #fa4100;
+}
+
+.links5 a:hover,
+.links5 a:nth-child(2) {
+	color: #fa4100;
+}
+
+
+/* links5 Paragraph */
+.links5 p {
+	margin: 10px 0;
+	font-size: 0.75em;
+	color: #8f8f8f;
+	text-decoration: #fa4100;
+}
+
+.links5 p:hover,
+.links5 p:nth-child(2) {
+	color: #fa4100;
+}
+
+/* .box {
+	position: relative;
+	width: 380px;
+	height: 230px;
+	background: #000000;
+	border-radius: 8px;
+	overflow: hidden;
+} */
+
+
+
+
+
+.cards {
+    width: 100%;
+    padding: 35px 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+}
+
+.cards .card{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+
+
+
+
+
+
+.card-content a {
+    text-decoration: none; /* Removes the underline */
+    color: #9d9d9d; /* Changes the text color */
+    font-weight: bold; /* Makes the text bold */
+    font-size: 16px; /* Adjusts the font size */
+    padding: 10px; /* Adds padding around the text */
+    display: inline-block; /* Allows padding and margin to work properly */
+    transition: color 0.3s ease, background-color 0.3s ease; /* Adds a transition effect */
+}
+
+.card-content a:hover {
+    color: #1c1c1c; /* Changes color on hover */
+    background-color: #ecf0f1; /* Adds background color on hover */
+}
+
+
+
+
+.number {
+    font-size: 55px;
+    font-weight: 500;
+    color: #9d9d9d;
+}
+
+.card-name {
+    color: #888;
+    font-weight: 600;
+}
+
+
+.icon-box-in i {
+    font-size: 55px;
+    color: #9d9d9d;
+}
+.icon-box-out i {
+    font-size: 55px;
+    color: #009a66;
+}
+
+
+.icon-box i {
+    font-size: 55px;
+    color: #9d9d9d;
+}
+
+.fa-4x i{
+	font-size: 55px;
+    color: #9d9d9d;
+}
+
+
+
+@media (max-width:880px) {
+
+    .cards {
+        width: 100%;
+        padding: 35px 20px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+
+}
+
+@media (max-width:500px) {
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/*Navbar*/
+
+.navbar-brand {
+	color: #fff;
+	cursor: pointer;
+	margin-bottom: 8px;
+}
+
+.navbar-brand:hover {
+	background-color: #fff;
+	/* Change to black */
+}
+
+.dropdown-menu {
+	background-color: #fff;
+	margin-top: 0;
+	/* color: #fff; */
+	/* Ensure the dropdown is aligned properly */
+}
+
+.dropdown-menu>li>a {
+	color: #000;
+}
+
+.dropdown .dropdown-menu {
+	left: auto;
+	/* Override Bootstrap's default left alignment */
+	right: 0;
+	/* Align dropdown to the right */
+}
+
